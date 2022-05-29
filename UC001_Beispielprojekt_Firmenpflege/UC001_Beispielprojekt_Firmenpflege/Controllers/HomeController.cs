@@ -108,7 +108,7 @@ namespace UC001_Beispielprojekt_Firmenpflege.Controllers
                     cml = cml.Where(c => c.City.ToLower().Contains(city));
                 }
 
-                if (!String.IsNullOrEmpty(holding))
+                if (!String.IsNullOrEmpty(search.Holding))
                 {
                     holding = search.Holding.ToLower();
                     cml = cml.Where(h => h.Holding.ToLower().Contains(holding));
