@@ -1,0 +1,28 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - Meine ASP.NET-Anwendung</title>
+    <link href="@Url.Content("~/Content/Site.css")"
+          rel="stylesheet" type="text/css" />
+    
+</head>
+<body>
+    <div class="navbar">
+        <ul class="nav">
+            <li>@Html.ActionLink("Startseite", "Index", "Home")</li>
+            <li>@Html.ActionLink("CRUD", "Index", "CompanyModels")</li>
+        </ul>
+    </div>
+    <div class="container">
+        @RenderBody()
+        <hr />
+        <footer>
+            <p>&copy; @DateTime.Now.Year - Meine ASP.NET-Anwendung</p>
+        </footer>
+    </div>
+
+</body>
+</html>

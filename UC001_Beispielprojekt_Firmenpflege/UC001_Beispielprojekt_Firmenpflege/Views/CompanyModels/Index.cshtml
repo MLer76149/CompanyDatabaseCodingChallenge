@@ -1,0 +1,63 @@
+﻿@model IEnumerable<UC001_Beispielprojekt_Firmenpflege.Models.CompanyModel>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.CompanyName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Industry)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.AmountEmployees)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.City)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Holding)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Level)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.CompanyName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Industry)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.AmountEmployees)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.City)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Holding)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Level)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.CompanyNo }) |
+            @Html.ActionLink("Details", "Details", new { id=item.CompanyNo }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.CompanyNo })
+        </td>
+    </tr>
+}
+
+</table>

@@ -1,0 +1,85 @@
+﻿@*@model IEnumerable<UC001_Beispielprojekt_Firmenpflege.Models.CompanyModel>*@
+@model PagedList.IPagedList<UC001_Beispielprojekt_Firmenpflege.Models.CompanyNumberIndustryViewModel>
+@using PagedList.Mvc
+
+
+@{
+    ViewBag.Title = "Home Page";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div>
+
+    <form asp-controller="Home" asp-action="Index" method="get">
+        <p>
+            Firmennummer: @Html.DropDownList("companyNumber", Model.FirstOrDefault().Number, "Bitte auswählen")
+            Name: <input type="text" name="companyName" />
+            Branche: @Html.DropDownList("industry", Model.FirstOrDefault().IndustrySelect, "Bitte auswählen")
+            Stadt: <input type="text" name="city" />
+            Mutterfirma: <input type="text" name="holding" />
+
+            <input type="submit" value="Suchen" />
+            <input type="button" value="Zurücksetzen" onclick="location.href='@Url.Action("Index", "Home", new { delete = "delete" })'" />
+        </p>
+    </form>
+    <span>
+
+    </span>
+    @if (!Model.FirstOrDefault().Companies.Any())
+    {
+        <div>"Keine Firma gefunden"</div>
+    }
+    else
+    {
+        <div>
+            <table>
+                <tr>
+                    <th>
+                        @Html.ActionLink("Nummer", "Index", new { sortOrder = ViewBag.NumberSortParam, filter = ViewBag.CurrentSearch })
+                    </th>
+                    <th>
+                        Name
+                    </th>
+                    <th>
+                        Branche
+                    </th>
+                    <th>
+                        Anzahl Mitarbeiter
+                    </th>
+                    <th>
+                        Stadt
+                    </th>
+                    <th>
+                        Mutterkonzern
+                    </th>
+                    <th>
+                        Level
+                    </th>
+                </tr>
+                @foreach (var item in Model.FirstOrDefault().Companies)
+                {
+                    <tr>
+                        <td>@item.CompanyNo</td>
+                        <td>@item.CompanyName</td>
+                        <td>@item.Industry</td>
+                        <td>@item.AmountEmployees</td>
+                        <td>@item.City</td>
+                        <td>@item.Holding</td>
+                        <td>@item.Level</td>
+                    </tr>
+                }
+
+            </table>
+
+        </div>
+
+    }
+    <div>
+        <div>Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount</div>
+
+        <div class="paging">
+            @Html.PagedListPager(Model, page => Url.Action("Index",
+               new { page, sortOrder = ViewBag.CurrentSort }))
+            </div>
+    </div>
+
+</div>
